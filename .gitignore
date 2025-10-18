@@ -1,0 +1,94 @@
+# compiled output
+/server/dist
+/server/node_modules
+/server/build
+
+# Logs
+/server/logs
+/server/*.log
+/server/npm-debug.log*
+/server/pnpm-debug.log*
+/server/yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# OS
+/server/.DS_Store
+
+# Tests
+/server/coverage
+/server/.nyc_output
+
+# IDEs and editors
+/server/.idea
+/.idea
+/server/.project
+/server/.classpath
+/server/.c9/
+/server/*.launch
+/server/.settings/
+/server/*.sublime-workspace
+
+# IDE - VSCode
+/server/.vscode/*
+/server/settings.json
+/server/tasks.json
+/server/launch.json
+/server/extensions.json
+
+# dotenv environment variable files
+.env
+.env.development.local
+.env.test.local
+.env.production.local
+.env.local
+
+/server/.env
+/server/.env.development.local
+/server/.env.test.local
+/server/.env.production.local
+/server/.env.local
+
+# temp directory
+/server/.temp
+/server/.tmp
+
+# Runtime data
+pids
+/server/*.pid
+/server/*.seed
+/server/*.pid.lock
+
+# Diagnostic reports (https://nodejs.org/api/report.html)
+/server/report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+
+
+# Nuxt dev/build outputs
+/client/.output
+/client/.data
+/client/.nuxt
+/client/.nitro
+/client/.cache
+/client/dist
+
+# Node dependencies
+/client/node_modules
+
+# Logs
+/client/logs
+/client/*.log
+
+# Misc
+/client/.DS_Store
+/.fleet
+/client/.idea
+
+# Local env files
+.env
+.env.*
+!.env.example
+
+# Local env files
+/client/.env
+/client/.env.*
+/client/!.env.example

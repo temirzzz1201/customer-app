@@ -1,1 +1,1 @@
-export const mainClientUrl = 'http://localhost:8080';
+export const mainClientUrl = 'http://localhost:5173';

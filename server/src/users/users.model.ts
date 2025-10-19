@@ -4,7 +4,6 @@ import {
   Model,
   PrimaryKey,
   AutoIncrement,
-  AllowNull,
   DataType,
   Default,
 } from 'sequelize-typescript';
@@ -19,47 +18,47 @@ export class Users extends Model<Users> {
   @Column({
     allowNull: false,
   })
-  name: string;
+  declare name: string;
 
   @Column({
     allowNull: false,
     unique: true,
   })
-  phone: string;
+  declare phone: string;
 
   @Column({
     allowNull: false,
     unique: true,
   })
-  email: string;
+  declare email: string;
 
   @Column({
     allowNull: false,
     type: DataType.STRING(255),
   })
-  password: string;
+  declare password: string;
 
   @Default('client')
   @Column(DataType.ENUM('client', 'provider'))
-  role: 'client' | 'provider';
+  declare role: 'client' | 'provider';
 
   @Column({
     type: DataType.STRING,
     allowNull: true,
   })
-  resetPasswordToken: string | null;
+  declare resetPasswordToken: string | null;
 
   @Column({
     type: DataType.BIGINT,
     allowNull: true,
   })
-  resetPasswordExpires: number | null;
+  declare resetPasswordExpires: number | null;
 
   @Column({
     type: DataType.STRING,
     allowNull: true,
   })
-  avatar: string | null;
+  declare avatar: string | null;
 
   @Column({ type: DataType.FLOAT, allowNull: true })
   declare lat: number | null;

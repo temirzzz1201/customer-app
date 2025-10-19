@@ -17,8 +17,8 @@ async function bootstrap() {
   });
 
   const config = new DocumentBuilder()
-    .setTitle('Articles API')
-    .setDescription('CRUD статьи с авторизацией')
+    .setTitle('Customer API')
+    .setDescription('апи приложения для заказчиков и исполнителей')
     .setVersion('1.0')
     .addBearerAuth()
     .build();

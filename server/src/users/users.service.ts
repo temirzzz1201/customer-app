@@ -29,19 +29,13 @@ export class UsersService {
   }
 
   async create(dto: RegisterUserDto): Promise<Users> {
-    const { name, phone, email, password } = dto;
-    const existingAdmin = await this.userModel.findOne({
-      where: { role: 'admin' },
-    });
-    const role = existingAdmin ? 'user' : 'admin';
-    const hash = await bcrypt.hash(password, 10);
+    const { name, phone, email, password, role } = dto;
 
-    const isAdmin = !existingAdmin;
-    const phoneToSave = isAdmin ? '0000000000' : phone;
+    const hash = await bcrypt.hash(password, 10);
 
     return this.userModel.create({
       name,
-      phone: phoneToSave,
+      phone,
       email,
       password: hash,
       role,

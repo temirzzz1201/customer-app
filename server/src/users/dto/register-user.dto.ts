@@ -4,6 +4,7 @@ import {
   IsPhoneNumber,
   MinLength,
   IsEmail,
+  IsOptional,
 } from 'class-validator';
 
 export class RegisterUserDto {
@@ -28,7 +29,7 @@ export class RegisterUserDto {
   @IsString()
   role: 'client' | 'provider';
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
-  address: string;
+  address?: string;
 }

@@ -27,8 +27,8 @@ export class AuthService {
     return this.createToken(user);
   }
 
-  async login(name: string, password: string) {
-    const user = await this.usersService.validateUser(name, password);
+  async login(email: string, password: string) {
+    const user = await this.usersService.validateUser(email, password);
     if (!user) throw new UnauthorizedException('Invalid credentials');
     return this.createToken(user);
   }

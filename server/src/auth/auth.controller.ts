@@ -30,7 +30,7 @@ export class AuthController {
 
   @Post('login')
   login(@Body() dto: LoginUserDto) {
-    return this.authService.login(dto.name, dto.password);
+    return this.authService.login(dto.email, dto.password);
   }
 
   @UseGuards(JwtAuthGuard)

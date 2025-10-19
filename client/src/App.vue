@@ -19,5 +19,10 @@ import appHeader from "./components/app-header.vue";
   flex-direction: column;
   margin-left: auto;
   margin-right: auto;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
 }
 </style>

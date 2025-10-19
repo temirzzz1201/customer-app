@@ -6,7 +6,7 @@
 
 <style scoped>
 .auth-footer {
-  margin-top: 2rem;
+  margin: 2rem 0;
   text-align: center;
   color: var(--el-text-color-secondary);
   font-size: 0.8rem;

@@ -1,17 +1,34 @@
 import { createWebHistory, createRouter } from "vue-router";
 import Home from "../views/Home.vue";
-import Register from "../views/Register.vue";
 import Profile from "../views/Profile.vue";
-import Login from "../views/Login.vue";
+import { useAuth } from "../composibles/useAuth";
 
 const routes = [
-  { path: "/", component: Home },
-  { path: "/login", component: Login },
-  { path: "/register", component: Register },
-  { path: "/profile", component: Profile },
+  { path: "/", name: "Home", component: Home },
+  {
+    path: "/profile",
+    name: "Profile",
+    component: Profile,
+    meta: {
+      requiresAuth: true,
+    },
+  },
 ];
 
 export const router = createRouter({
   history: createWebHistory(),
   routes,
+});
+
+router.beforeEach(async (to, from, next) => {
+  const { user, fetchProfile } = useAuth();
+
+  if (to.meta.requiresAuth) {
+    if (!user.value) {
+      const profile = await fetchProfile();
+      if (!profile) return next("/");
+    }
+  }
+
+  next();
 });

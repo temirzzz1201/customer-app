@@ -6,6 +6,9 @@
       <el-avatar icon="UserFilled" />
     </el-header>
 
+    <el-row>
+      <el-button @click="logout(router)">Выйти</el-button>
+    </el-row>
     <!-- Основной контент -->
     <el-main class="main">
       <h2 class="greeting">Добро пожаловать 👋</h2>
@@ -34,12 +37,28 @@
   </el-container>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { onMounted } from "vue";
+import { useAuth } from "../composibles/useAuth";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+
+const { user, fetchProfile, logout } = useAuth();
+
+onMounted(async () => {
+  if (!user.value) await fetchProfile();
+});
+</script>
 
 <style scoped>
 .app-container {
+  display: flex;
+  flex-direction: column;
   min-height: 100vh;
-  background: linear-gradient(135deg, #ecf5ff 0%, #f6f9ff 50%, #e8f0fe 100%);
+}
+
+.main {
   display: flex;
   flex-direction: column;
 }
@@ -75,7 +94,6 @@
   background: rgba(255, 255, 255, 0.4);
   backdrop-filter: blur(10px);
   padding: 0.5rem 0;
-  position: sticky;
-  bottom: 0;
+  margin-top: auto;
 }
 </style>

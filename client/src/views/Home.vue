@@ -111,13 +111,16 @@
 
 <script setup lang="ts">
 import { ref, reactive } from "vue";
+import { useRouter } from "vue-router";
 import { ElMessage, type FormInstance, type FormRules } from "element-plus";
 import { UserFilled } from "@element-plus/icons-vue";
 import axios from "axios";
+import { clientUrl } from "../utils/constants";
 
 const isRegister = ref(false);
 const formRef = ref<FormInstance>();
 const loading = ref(false);
+const router = useRouter();
 
 const form = reactive({
   name: "",
@@ -215,9 +218,13 @@ const onSubmit = async (formEl: FormInstance | undefined) => {
         };
 
         const res = await axios.post(
-          "http://localhost:5000/api/auth/register",
+          `${clientUrl}/auth/register`,
+
           payload
         );
+        localStorage.setItem("token", res.data.access_token);
+        router.push("/profile");
+
         ElMessage.success("Регистрация успешна!");
         console.log("✅ Регистрация:", res.data);
       } else {
@@ -226,10 +233,9 @@ const onSubmit = async (formEl: FormInstance | undefined) => {
           password: form.password,
         };
 
-        const res = await axios.post(
-          "http://localhost:5000/api/auth/login",
-          payload
-        );
+        const res = await axios.post(`${clientUrl}/auth/login`, payload);
+        localStorage.setItem("token", res.data.access_token);
+        router.push("/profile");
         ElMessage.success("Вход выполнен!");
         console.log("✅ Логин:", res.data);
       }

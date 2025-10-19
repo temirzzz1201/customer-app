@@ -1,7 +1,7 @@
 <template>
   <div class="auth-container">
     <div class="auth-header">
-      <el-icon size="23"><UserFilled /></el-icon>
+      <img :src="appIcon" width="60px" alt="App Icon" />
       <h3>{{ isRegister ? "Регистрация" : "Добро пожаловать" }}</h3>
       <p>
         {{
@@ -19,19 +19,16 @@
       label-position="top"
       class="auth-form"
     >
-      <!-- Имя -->
       <template v-if="isRegister">
         <el-form-item label="Ваше имя" prop="name">
           <el-input v-model="form.name" placeholder="Введите имя" />
         </el-form-item>
       </template>
 
-      <!-- Email -->
       <el-form-item label="Email" prop="email">
         <el-input v-model="form.email" placeholder="Введите email" />
       </el-form-item>
 
-      <!-- Телефон -->
       <template v-if="isRegister">
         <el-form-item label="Телефон" prop="phone">
           <el-input
@@ -42,7 +39,6 @@
         </el-form-item>
       </template>
 
-      <!-- Пароль -->
       <el-form-item label="Пароль" prop="password">
         <el-input
           v-model="form.password"
@@ -51,7 +47,6 @@
         />
       </el-form-item>
 
-      <!-- Подтверждение пароля -->
       <template v-if="isRegister">
         <el-form-item label="Подтверждение пароля" prop="confirmPassword">
           <el-input
@@ -61,7 +56,6 @@
           />
         </el-form-item>
 
-        <!-- Роль -->
         <el-form-item label="Ваша роль" prop="role">
           <el-select v-model="form.role" placeholder="Выберите роль">
             <el-option
@@ -73,7 +67,6 @@
           </el-select>
         </el-form-item>
 
-        <!-- Адрес -->
         <el-form-item
           v-if="form.role === 'provider'"
           label="Адрес оказания услуги"
@@ -86,7 +79,6 @@
         </el-form-item>
       </template>
 
-      <!-- Кнопка -->
       <el-button
         type="primary"
         round
@@ -98,7 +90,6 @@
         {{ isRegister ? "Зарегистрироваться" : "Войти" }}
       </el-button>
 
-      <!-- Ссылка на переключение -->
       <p class="auth-form__links">
         {{ isRegister ? "Уже есть аккаунт?" : "Нет аккаунта?" }}
         <el-link type="info" @click="toggleMode" class="auth-form__links-link">
@@ -113,9 +104,9 @@
 import { ref, reactive } from "vue";
 import { useRouter } from "vue-router";
 import { ElMessage, type FormInstance, type FormRules } from "element-plus";
-import { UserFilled } from "@element-plus/icons-vue";
 import axios from "axios";
 import { clientUrl } from "../utils/constants";
+import appIcon from "../assets/icon.png";
 
 const isRegister = ref(false);
 const formRef = ref<FormInstance>();
@@ -193,7 +184,9 @@ const rules = reactive<FormRules>({
 
 const toggleMode = () => {
   isRegister.value = !isRegister.value;
-  Object.keys(form).forEach((key) => (form[key] = ""));
+  (Object.keys(form) as (keyof typeof form)[]).forEach((key) => {
+    form[key] = "" as any;
+  });
 };
 
 const onSubmit = async (formEl: FormInstance | undefined) => {
@@ -226,7 +219,6 @@ const onSubmit = async (formEl: FormInstance | undefined) => {
         router.push("/profile");
 
         ElMessage.success("Регистрация успешна!");
-        console.log("✅ Регистрация:", res.data);
       } else {
         const payload = {
           email: form.email,
@@ -237,10 +229,8 @@ const onSubmit = async (formEl: FormInstance | undefined) => {
         localStorage.setItem("token", res.data.access_token);
         router.push("/profile");
         ElMessage.success("Вход выполнен!");
-        console.log("✅ Логин:", res.data);
       }
 
-      // Очистка формы после успеха
       formEl.resetFields();
     } catch (error: any) {
       const msg =
@@ -248,7 +238,6 @@ const onSubmit = async (formEl: FormInstance | undefined) => {
         error.message ||
         "Произошла ошибка при запросе";
       ElMessage.error(msg);
-      console.error("❌ Ошибка:", error);
     } finally {
       loading.value = false;
     }

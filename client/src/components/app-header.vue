@@ -22,5 +22,6 @@ const toggleDark = useToggle(isDark);
 .el-header {
   display: flex;
   align-items: center;
+  height: 50px;
 }
 </style>

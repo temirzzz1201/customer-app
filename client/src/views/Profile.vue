@@ -1,17 +1,16 @@
 <template>
   <el-container class="app-container">
-    <!-- Верхний бар -->
     <el-header class="header">
       <span class="app-title">CustomerApp</span>
-      <el-avatar icon="UserFilled" />
+      <el-button @click="logout(router)">Выйти</el-button>
     </el-header>
 
-    <el-row>
-      <el-button @click="logout(router)">Выйти</el-button>
-    </el-row>
-    <!-- Основной контент -->
-    <el-main class="main">
+    <div class="main">
       <h2 class="greeting">Добро пожаловать 👋</h2>
+
+      <el-row class="avatar">
+        <el-avatar icon="UserFilled" />
+      </el-row>
 
       <div class="actions">
         <el-button type="primary" round size="large" icon="Search"
@@ -24,7 +23,7 @@
           >Сообщения</el-button
         >
       </div>
-    </el-main>
+    </div>
 
     <!-- Нижняя панель -->
     <el-footer class="footer">
@@ -58,16 +57,11 @@ onMounted(async () => {
   min-height: 100vh;
 }
 
-.main {
-  display: flex;
-  flex-direction: column;
-}
-
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem;
+  padding: 0 1rem;
   background: transparent;
 }
 
@@ -75,6 +69,12 @@ onMounted(async () => {
   font-weight: 600;
   font-size: 1.2rem;
   color: #1f2d3d;
+}
+
+.avatar {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
 }
 
 .greeting {
@@ -87,11 +87,9 @@ onMounted(async () => {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  margin: 2rem;
 }
 
 .footer {
-  background: rgba(255, 255, 255, 0.4);
   backdrop-filter: blur(10px);
   padding: 0.5rem 0;
   margin-top: auto;

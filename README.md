@@ -15,6 +15,16 @@
 - **NestJS** — прогрессивный Node.js фреймворк.
 - **Sequelize** — ORM для работы с базой данных.
 
+- ### Настройка .env
+
+PORT=5000
+DB_HOST=your_db_host
+DB_PORT=your_db_port
+DB_USERNAME=your_db_username
+DB_PASSWORD=your_db_password
+DB_NAME=your_db_name
+JWT_SECRET=your_jwt_secret
+
 ---
 
 ## ⚙️ Установка и запуск
@@ -26,12 +36,9 @@ npm install        # Установить зависимости
 npm run dev        # Запустить в режиме разработки
 npm run build      # Собрать проект для продакшена
 
-### Настройка .env
-
-PORT=5000
-DB_HOST=your_db_host
-DB_PORT=your_db_port
-DB_USERNAME=your_db_username
-DB_PASSWORD=your_db_password
-DB_NAME=your_db_name
-JWT_SECRET=your_jwt_secret
+### Бэкенд
+```bash
+cd server          # Перейти в папку бэкенда
+npm install        # Установить зависимости
+npm run start:dev  # Запустить в режиме разработки
+npm run build      # Собрать проект для продакшена
